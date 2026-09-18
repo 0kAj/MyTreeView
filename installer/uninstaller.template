@@ -19,7 +19,7 @@ case "$1" in
         echo
 
         printf "Selection [1/2]: "
-        read choice
+        read -r choice
 
         case "$choice" in
             1)
@@ -46,6 +46,18 @@ if [ "$MODE" = "local" ]; then
     PROGRAM="$INSTALL_DIR/mytree"
 
     echo "Removing local MyTree installation..."
+    echo
+    printf "Continue with uninstallation? [y/N]: "
+    read -r confirm
+
+    case "$confirm" in
+        [yY]|[yY][eE][sS])
+            ;;
+        *)
+            echo "Uninstallation aborted."
+            exit 0
+            ;;
+    esac
 
     rm -f "$LINK"
     rm -f "$PROGRAM"
@@ -106,6 +118,18 @@ elif [ "$MODE" = "global" ]; then
 
 
     echo "Removing global MyTree installation..."
+    echo
+    printf "Continue with uninstallation? [y/N]: "
+    read -r confirm
+
+    case "$confirm" in
+        [yY]|[yY][eE][sS])
+            ;;
+        *)
+            echo "Uninstallation aborted."
+            exit 0
+            ;;
+    esac
 
     rm -f "$LINK"
     rm -f "$PROGRAM"

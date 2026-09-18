@@ -19,7 +19,7 @@ case "$1" in
         echo
 
         printf "Selection [1/2]: "
-        read choice
+        read -r choice
 
         case "$choice" in
             1)
@@ -87,9 +87,22 @@ if [ "$MODE" = "local" ]; then
             ;;
     esac
 
+    echo
     echo "Installing MyTree locally to:"
     echo "  $INSTALL_DIR"
+    echo
 
+    printf "Start installation? [y/N]: "
+    read -r confirm
+
+    case "$confirm" in
+        [yY]|[yY][eE][sS])
+            ;;
+        *)
+            echo "Installation aborted."
+            exit 0
+            ;;
+    esac
 
 elif [ "$MODE" = "global" ]; then
 
@@ -108,8 +121,22 @@ elif [ "$MODE" = "global" ]; then
 
     mkdir -p "$INSTALL_DIR"
 
+    echo
     echo "Installing MyTree globally to:"
     echo "  $INSTALL_DIR"
+    echo
+
+    printf "Start installation? [y/N]: "
+    read -r confirm
+
+    case "$confirm" in
+        [yY]|[yY][eE][sS])
+            ;;
+        *)
+            echo "Installation aborted."
+            exit 0
+            ;;
+    esac
 
 fi
 
